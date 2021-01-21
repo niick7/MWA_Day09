@@ -46,3 +46,41 @@ module.exports.getBook = function(req, res) {
     res.status(response.status).json(response.message);
   })
 }
+
+module.exports.createBook = function(req, res) {
+  Book.create({
+    title: req.body.title,
+    price: parseFloat(req.body.price),
+    rate: parseInt(req.body.rate),
+    year: parseInt(req.body.year)
+  }, function(err, createdBook){
+    const response = {
+      status: 200,
+      message: createdBook
+    }
+    if (err) {
+      response.status = 500;
+      response.message = err;
+    }
+    res.status(response.status).json(response.message);
+  })
+}
+
+module.exports.deleteBook = function(req, res) {
+  const bookId = req.params.bookId;
+  Book.findByIdAndDelete(bookId).exec(function(err, book){
+    response = {
+      status: 204,
+      message: book
+    }
+    if (err) {
+      response.status = 500;
+      response.message = err;
+    }
+    if(!book) {
+      response.status = 404;
+      response.message = {message: "Book Id is not found."}
+    }
+    res.status(response.status).json(response.message);
+  })
+}

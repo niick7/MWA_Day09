@@ -7,7 +7,8 @@ const bookSchema = mongoose.Schema({
   },
   price: {
     type: Number,
-    required: true
+    required: true,
+    "default": 0.0
   },
   rate: {
     type: Number,

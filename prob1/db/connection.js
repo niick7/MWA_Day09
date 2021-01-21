@@ -3,7 +3,7 @@ const dbURL = "mongodb://localhost:27017/BooksDB";
 
 require("./models/books");
 
-mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 mongoose.connection.on("connected", function(){
   console.log("Mongodb connected.");
