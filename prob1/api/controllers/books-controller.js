@@ -48,6 +48,7 @@ module.exports.getBook = function(req, res) {
 }
 
 module.exports.createBook = function(req, res) {
+
   Book.create({
     title: req.body.title,
     price: parseFloat(req.body.price),
@@ -67,6 +68,7 @@ module.exports.createBook = function(req, res) {
 }
 
 module.exports.deleteBook = function(req, res) {
+  console.log("deleted");
   const bookId = req.params.bookId;
   Book.findByIdAndDelete(bookId).exec(function(err, book){
     response = {
